@@ -13,6 +13,7 @@ type TimerState = {
   currentTimerName: string,
   output: string,
   total: number,
+  totalHours: number,
   interval?: any,
 }
 
@@ -26,8 +27,12 @@ class Timer extends Component<TimerProps, TimerState> {
       currentTimerName: 'timer',
       output: this.addZero(props.timer)+':00',
       total: +(localStorage.getItem('totalThisSession') || 0),
+      totalHours: this.getHoursFromSeconds(+(localStorage.getItem('totalThisSession') || 0)),
+
     }
   }
+
+  getHoursFromSeconds = (seconds:number):number => Math.floor(seconds / 3600);
 
   addZero = (time: number): string => {
     let res = String(time);
@@ -43,6 +48,7 @@ class Timer extends Component<TimerProps, TimerState> {
 
     if (this.state.currentTimerName === 'timer') {
       this.setState({total: this.state.total + 1});
+      this.setState({totalHours: this.getHoursFromSeconds(this.state.total)});
       localStorage.setItem('totalThisSession', String(this.state.total));
     }
 
@@ -82,6 +88,7 @@ class Timer extends Component<TimerProps, TimerState> {
         <div className="timer">{this.state.output}</div>
         <button onClick={() => this.start()}>Старт</button>
         <button onClick={() => this.stop()}>Стоп</button>
+        <span>Hours: {this.state.totalHours}</span>
         <Link to='/total'>Завершить сеанс</Link>
         {/* <button onClick={() => this.endSession()}>Завершить сеанс</button> */}
       </>
