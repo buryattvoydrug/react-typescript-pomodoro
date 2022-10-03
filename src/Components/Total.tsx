@@ -1,31 +1,31 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 
 type TotalState = {
   totalThisSession: number,
-  totalThisWeek?: number,
-  totalThisMonth?: number,
 }
 
 export default class Total extends Component<{}, TotalState> {
-  constructor() {
-    super({});
-    this.state = {
-      totalThisSession: 0,
-    }
-  }
-
+  
   endSession = ():void => {
-    this.setState({totalThisSession: +(localStorage.getItem('totalToday') || 0)});
-    localStorage.setItem('totalToday', '0');
+    localStorage.setItem('totalThisSession', '0');
   }
+  
+  toStringDate = (seconds: number):string => {
+    let mins = Math.floor(seconds / 60);
+    let hours = Math.floor(mins / 60);
+    let minsName = mins === 1? ' minute ' : ' minutes '; 
+    let hoursName = hours === 1? ' hour ' : ' hours '; 
+    return hours + hoursName + 'and ' + (mins - hours * 60) + minsName;
+  }
+  
 
   render() {
+
     return (
       <>
-      <button onClick={() => this.endSession()}>Завершить сеанс</button>
-        <span>totalThisSession: {this.state.totalThisSession}</span>
-        <span>totalThisWeek: {this.state.totalThisWeek}</span>
-        <span>totalThisMonth: {this.state.totalThisMonth}</span>
+        <Link to='/' onClick={() => this.endSession()}>Новый сеанс</Link>
+        <span>totalThisSession: {this.toStringDate(+(localStorage.getItem('totalThisSession') || 0))}</span>
       </>
     )
   }

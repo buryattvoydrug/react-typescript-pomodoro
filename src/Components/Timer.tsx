@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 
 type TimerProps = {
   timer: number,
@@ -24,7 +25,7 @@ class Timer extends Component<TimerProps, TimerState> {
       currentTimer: props.timer * 60 - 1,
       currentTimerName: 'timer',
       output: this.addZero(props.timer)+':00',
-      total: +(localStorage.getItem('totalToday') || 0),
+      total: +(localStorage.getItem('totalThisSession') || 0),
     }
   }
 
@@ -40,8 +41,10 @@ class Timer extends Component<TimerProps, TimerState> {
     let secondsLeft = this.state.currentTimer;
     this.setState({currentTimer: secondsLeft - 1});
 
-    this.setState({total: this.state.total + 1});
-    localStorage.setItem('totalToday', String(this.state.total));
+    if (this.state.currentTimerName === 'timer') {
+      this.setState({total: this.state.total + 1});
+      localStorage.setItem('totalThisSession', String(this.state.total));
+    }
 
     let mins = this.addZero(Math.floor(secondsLeft / 60));
     let secs = this.addZero(secondsLeft % 60);
@@ -49,13 +52,12 @@ class Timer extends Component<TimerProps, TimerState> {
   }
 
   start = ():void => {
-    this.setState({interval: setInterval(() => this.renderTimer(), 1000)});
+    this.setState({interval: setInterval(() => this.renderTimer(), 1)});
   }
 
   stop = ():void => {
     this.setState({interval: clearInterval(this.state.interval)});
   }
-
 
   isTimeUp = ():boolean => {
     if (this.state.currentTimer < 0) {
@@ -80,6 +82,8 @@ class Timer extends Component<TimerProps, TimerState> {
         <div className="timer">{this.state.output}</div>
         <button onClick={() => this.start()}>Старт</button>
         <button onClick={() => this.stop()}>Стоп</button>
+        <Link to='/total'>Завершить сеанс</Link>
+        {/* <button onClick={() => this.endSession()}>Завершить сеанс</button> */}
       </>
     )
   }
