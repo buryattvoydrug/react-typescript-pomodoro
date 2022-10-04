@@ -23,9 +23,9 @@ class Timer extends Component<TimerProps, TimerState> {
     this.state = {
       timerTime: props.timer * 60 - 1,
       breakTime: props.break * 60 - 1,
-      currentTimer: props.timer * 60 - 1,
-      currentTimerName: 'timer',
-      output: this.addZero(props.timer)+':00',
+      currentTimer: +(localStorage.getItem('lastTimer') || props.timer * 60 - 1),
+      currentTimerName: localStorage.getItem('lastTimerName') || 'timer',
+      output: this.timeToString(+(localStorage.getItem('lastTimer') || props.timer * 60)),
       total: +(localStorage.getItem('totalThisSession') || 0),
       totalHours: this.getHoursFromSeconds(+(localStorage.getItem('totalThisSession') || 0)),
 
@@ -34,13 +34,16 @@ class Timer extends Component<TimerProps, TimerState> {
 
   getHoursFromSeconds = (seconds:number):number => Math.floor(seconds / 3600);
 
-  addZero = (time: number): string => {
-    let res = String(time);
-    if (res.length < 2) return '0' + res;
-    return res;
+  private timeToString = (time: number): string => {
+    let minutes = String(Math.floor(time / 60));
+    let seconds = String(time % 60);
+
+    if (minutes.length < 2) minutes = '0' + minutes;
+    if (seconds.length < 2) seconds = '0' + seconds;
+    return minutes + ':' + seconds;
   }
 
-  renderTimer = ():void => {
+  private renderTimer = ():void => {
     if (this.isTimeUp()) return;
 
     let secondsLeft = this.state.currentTimer;
@@ -52,9 +55,7 @@ class Timer extends Component<TimerProps, TimerState> {
       localStorage.setItem('totalThisSession', String(this.state.total));
     }
 
-    let mins = this.addZero(Math.floor(secondsLeft / 60));
-    let secs = this.addZero(secondsLeft % 60);
-    this.setState({output: mins + ':' + secs});
+    this.setState({output: this.timeToString(secondsLeft)});
   }
 
   start = ():void => {
@@ -62,10 +63,12 @@ class Timer extends Component<TimerProps, TimerState> {
   }
 
   stop = ():void => {
+    localStorage.setItem('lastTimer', String(this.state.currentTimer));
+    localStorage.setItem('lastTimerName', String(this.state.currentTimerName));
     this.setState({interval: clearInterval(this.state.interval)});
   }
 
-  isTimeUp = ():boolean => {
+  private isTimeUp = ():boolean => {
     if (this.state.currentTimer < 0) {
       this.stop();
       this.changeTimer();
@@ -75,7 +78,7 @@ class Timer extends Component<TimerProps, TimerState> {
     return false;
   }
 
-  changeTimer = ():void => {
+  private changeTimer = ():void => {
     if (this.state.currentTimerName === 'timer')
       this.setState({currentTimer: this.state.breakTime, currentTimerName: 'break'});
     else

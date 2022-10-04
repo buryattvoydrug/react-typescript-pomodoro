@@ -9,6 +9,8 @@ export default class Total extends Component<{}, TotalState> {
   
   endSession = ():void => {
     localStorage.setItem('totalThisSession', '0');
+    localStorage.setItem('lastTimer', '');
+    localStorage.setItem('lastTimerName', '');
   }
   
   toStringDate = (seconds: number):string => {
