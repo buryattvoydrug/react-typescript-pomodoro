@@ -18,6 +18,7 @@ type TimerState = {
 }
 
 class Timer extends Component<TimerProps, TimerState> {
+  
   constructor(props: TimerProps) {
     super(props);
     this.state = {
@@ -86,6 +87,7 @@ class Timer extends Component<TimerProps, TimerState> {
   }
 
   render() {
+    console.log(this.context)
     return (
       <>
         <div className="timer">{this.state.output}</div>

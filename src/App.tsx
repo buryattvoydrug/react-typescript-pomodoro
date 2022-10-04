@@ -3,9 +3,11 @@ import { BrowserRouter, Routes as Switch, Route } from 'react-router-dom';
 import Timer from './Components/Timer';
 import Total from './Components/Total';
 import Set from './Components/Set';
-import {context, defaultContext} from './context';
+import {AppContextInterface, context, defaultContext } from './context';
+import React, { useState } from 'react';
 
-const App = () => (
+const App = () => {
+    return (
       <context.Provider value={defaultContext}>
         <BrowserRouter>
             <Switch>
@@ -15,6 +17,7 @@ const App = () => (
             </Switch>
         </BrowserRouter>
       </context.Provider>
-    );
+    )
+  };
 
 export default App;

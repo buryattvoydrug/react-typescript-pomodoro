@@ -1,18 +1,15 @@
 import React from "react";
 
-interface currentTimerI {
-  minutes: number,
-  seconds: number,
-}
 export interface AppContextInterface {
-  currentTimer: currentTimerI,
+  timer: number,
+  break: number,
+  changeContext?: () => void,
 }
 
 export const defaultContext: AppContextInterface = {
-  currentTimer: {
-    minutes:45,
-    seconds:0,
-  },
+  timer:45,
+  break:0,
+  changeContext: () => {}
 };
 
-export const context = React.createContext<AppContextInterface>(defaultContext);
+export const context = React.createContext(defaultContext);
