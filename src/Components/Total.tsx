@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { Link } from 'react-router-dom';
+import '../scss/total.scss';
 
 type TotalState = {
   totalThisSession: number,
@@ -26,8 +27,11 @@ export default class Total extends Component<{}, TotalState> {
 
     return (
       <>
+        <div className="total__text">
+          <h3>good job!</h3>
+          today you spent {this.toStringDate(+(localStorage.getItem('totalThisSession') || 0))} with benefit
+        </div>
         <Link to='/' onClick={() => this.endSession()}>Новый сеанс</Link>
-        <span>totalThisSession: {this.toStringDate(+(localStorage.getItem('totalThisSession') || 0))}</span>
       </>
     )
   }

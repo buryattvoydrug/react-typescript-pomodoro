@@ -1,0 +1,13 @@
+.timer {
+  width: 35vw;
+  height: 35vw;
+  border: 10px solid #fff;
+  border-radius: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .timer__output{
+    color: #ffffff;
+    font-size: 9vw;
+  }
+}

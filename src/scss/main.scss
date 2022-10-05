@@ -1,0 +1,20 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'SF Pro Display';
+  font-variant-numeric: tabular-nums;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.container {
+  width: 100vw;
+  height: 100vh;
+  padding: 10vh 10vw;
+  background: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .app {
+    
+  }
+}
