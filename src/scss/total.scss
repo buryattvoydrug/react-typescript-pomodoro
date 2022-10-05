@@ -2,6 +2,24 @@
   color: #fff;
   font-size: 2vw;
   h3 {
+    font-weight: 100;
     font-size: 7vw;
   }
+  .total__hours, .total__minutes {
+    display: block;
+    font-size: 3vw;
+    line-height: 120%;
+    strong {
+      font-size: 5vw;
+      font-weight: 600;
+    }
+  }
+  .total__minutes{
+    padding-left: 27vw;
+  }
+}
+.ok__button {
+  margin-top: 5vw;
+  display: flex;
+  justify-content: center;
 }

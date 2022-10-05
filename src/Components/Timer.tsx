@@ -59,7 +59,7 @@ class PomodoroTimer extends Component<TimerProps, TimerState> {
   }
 
   start = ():void => {
-    this.setState({interval: setInterval(() => this.renderTimer(), 1000)});
+    this.setState({interval: setInterval(() => this.renderTimer(), 1)});
   }
 
   stop = ():void => {
