@@ -3,13 +3,11 @@ import React from "react";
 export interface AppContextInterface {
   timer: number,
   break: number,
-  changeContext?: () => void,
 }
 
 export const defaultContext: AppContextInterface = {
-  timer:45,
-  break:0,
-  changeContext: () => {}
+  timer:91,
+  break:41,
 };
 
-export const context = React.createContext(defaultContext);
+export const context = React.createContext<AppContextInterface >(defaultContext);

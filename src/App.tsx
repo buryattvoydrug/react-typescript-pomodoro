@@ -7,7 +7,9 @@ import {AppContextInterface, context, defaultContext } from './context';
 import React, { useState } from 'react';
 
 const App = () => {
+  
     return (
+      //попробовать передать пропсами
       <context.Provider value={defaultContext}>
         <BrowserRouter>
             <Switch>

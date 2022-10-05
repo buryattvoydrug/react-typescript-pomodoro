@@ -4,7 +4,6 @@ import { AppContextInterface, context } from '../context';
 type TimerState = {
   timerMins: string,
   breakMins: string,
-  context: AppContextInterface
 }
 
 export default class Set extends Component<{},TimerState> {
@@ -16,39 +15,39 @@ export default class Set extends Component<{},TimerState> {
     this.state = {
       timerMins: '45',
       breakMins: '15',
-      context: {timer: 0, break: 0},
     }
   }
 
   handleChangeTimer = (e: React.FormEvent<HTMLInputElement>):void => {
     this.setState({
       timerMins: e.currentTarget.value,
-    })
+    });
+    // this.changeContext();
   }
 
   handleChangeBreak = (e: React.FormEvent<HTMLInputElement>):void => {
     this.setState({
       breakMins: e.currentTarget.value,
-    })
+    });
+    // this.changeContext();
   }
 
-  changeContext = () => {
-    this.setState({
-      context: {
-        timer: +this.state.timerMins,
-        break: +this.state.breakMins,
-      }
-    });
-  };
+  // changeContext = () => {
+  //   this.setState({
+  //     context: {
+  //       timer: +this.state.timerMins,
+  //       break: +this.state.breakMins,
+  //     }
+  //   });
+  // };
 
   render() {
-    const localContext = this.state.context;
-    const context: AppContextInterface = {
-      timer: localContext.timer, 
-      break: localContext.break, 
-      changeContext: this.changeContext 
-    };
-    console.log(this.context)
+    console.log(this.context);
+    // const localContext = this.state.context;
+    // const context: AppContextInterface = {
+    //   timer: localContext.timer, 
+    //   break: localContext.break, 
+    // };
 
     return (
       <form>
