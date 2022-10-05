@@ -1,25 +1,21 @@
-import React, { Component } from 'react'
+import React, { Component, useContext } from 'react'
 import { Link } from 'react-router-dom';
 import { context } from '../context';
+import { TimerProps, TimerState } from '../types';
 
-type TimerProps = {
-  timer: number,
-  break: number,
+
+export default function Timer() {
+  const {pomodoro} = useContext(context);
+  console.log(pomodoro);
+  return (
+    <>
+      <PomodoroTimer timer={pomodoro.timer} break={pomodoro.break} />
+      <Link to="/set" >Настройка</Link>
+    </>
+  );
 }
 
-type TimerState = {
-  timerTime: number,
-  breakTime: number,
-  currentTimer: number,
-  currentTimerName: string,
-  output: string,
-  total: number,
-  totalHours: number,
-  interval?: any,
-}
-
-class Timer extends Component<TimerProps, TimerState> {
-
+class PomodoroTimer extends Component<TimerProps, TimerState> {
   constructor(props: TimerProps) {
     super(props);
     this.state = {
@@ -61,7 +57,6 @@ class Timer extends Component<TimerProps, TimerState> {
   }
 
   start = ():void => {
-    console.log(this.context);
     this.setState({interval: setInterval(() => this.renderTimer(), 1)});
   }
 
@@ -89,7 +84,6 @@ class Timer extends Component<TimerProps, TimerState> {
   }
 
   render() {
-    // console.log(this.context);
     return (
       <>
         <div className="timer">{this.state.output}</div>
@@ -97,10 +91,7 @@ class Timer extends Component<TimerProps, TimerState> {
         <button onClick={() => this.stop()}>Стоп</button>
         <span>Hours: {this.state.totalHours}</span>
         <Link to='/total'>Завершить сеанс</Link>
-        {/* <button onClick={() => this.endSession()}>Завершить сеанс</button> */}
       </>
     )
   }
 }
-
-export default Timer;

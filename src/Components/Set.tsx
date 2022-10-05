@@ -1,65 +1,40 @@
-import React, { Component } from 'react'
-import { AppContextInterface, context } from '../context';
+import React, { useContext } from 'react'
+import { Link } from 'react-router-dom';
+import { context } from '../context';
 
-type TimerState = {
-  timerMins: string,
-  breakMins: string,
-}
+export default function Set() {
+  const {pomodoro, setPomodoro} = useContext(context);
 
-export default class Set extends Component<{},TimerState> {
-  static contextType = context;
-  context!: React.ContextType<typeof context>
-
-  constructor({}) {
-    super({});
-    this.state = {
-      timerMins: '45',
-      breakMins: '15',
-    }
-  }
-
-  handleChangeTimer = (e: React.FormEvent<HTMLInputElement>):void => {
-    this.setState({
-      timerMins: e.currentTarget.value,
+  const handleChangeTimer = (e: React.FormEvent<HTMLInputElement>):void => {
+    setPomodoro({
+      timer: +e.currentTarget.value,
+      break: pomodoro.break,
     });
-    // this.changeContext();
+    localStorage.setItem('lastPomodoroTimer', String(e.currentTarget.value));
   }
 
-  handleChangeBreak = (e: React.FormEvent<HTMLInputElement>):void => {
-    this.setState({
-      breakMins: e.currentTarget.value,
+  const handleChangeBreak = (e: React.FormEvent<HTMLInputElement>):void => {
+    setPomodoro({
+      timer: pomodoro.timer,
+      break: +e.currentTarget.value,
     });
-    // this.changeContext();
+    localStorage.setItem('lastPomodoroBreak', String(e.currentTarget.value));
   }
 
-  // changeContext = () => {
-  //   this.setState({
-  //     context: {
-  //       timer: +this.state.timerMins,
-  //       break: +this.state.breakMins,
-  //     }
-  //   });
-  // };
-
-  render() {
-    console.log(this.context);
-    // const localContext = this.state.context;
-    // const context: AppContextInterface = {
-    //   timer: localContext.timer, 
-    //   break: localContext.break, 
-    // };
-
-    return (
-      <form>
+  return (
+    <>
+    <form>
         <div className="set-block">
           <label htmlFor="timer">Timer</label>
-          <input type="text" name="timer" value={this.state.timerMins} onChange={this.handleChangeTimer}/>
+          <input type="text" name="timer" value={pomodoro.timer} onChange={(e)=>handleChangeTimer(e)}/>
         </div>
         <div className="set-block">
           <label htmlFor="break">Break</label>
-          <input type="text" name="break" value={this.state.breakMins} onChange={this.handleChangeBreak}/>
+          <input type="text" name="break" value={pomodoro.break} onChange={(e)=>handleChangeBreak(e)}/>
         </div>
       </form>
-    )
-  }
+      <Link to="/" >К таймеру</Link>
+    </>
+      
+  )
 }
