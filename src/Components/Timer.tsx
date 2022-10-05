@@ -91,10 +91,14 @@ class PomodoroTimer extends Component<TimerProps, TimerState> {
         <div className="timer">
           <div className="timer__output">{this.state.output}</div>
         </div>
-        <button className="start__button" onClick={() => this.start()}>Старт</button>
-        <button className="stop__button" onClick={() => this.stop()}>Стоп</button>
-        <span>Hours: {this.state.totalHours}</span>
-        <Link className="finish__button" to='/total'>Завершить сеанс</Link>
+        <button className="start__button" onClick={() => this.start()}>
+          <img src="/images/play.png" alt="" />
+        </button>
+        <button className="stop__button" onClick={() => this.stop()}>
+          <img src="/images/pause.png" alt="" />
+        </button>
+        {/* <span>Hours: {this.state.totalHours}</span> */}
+        <Link className="finish__button" to='/total'>finish</Link>
       </>
     )
   }

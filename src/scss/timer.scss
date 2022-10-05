@@ -11,3 +11,25 @@
     font-size: 9vw;
   }
 }
+.start__button, .stop__button {
+  background: none;
+  border:none;
+  img {
+    height: 4vw;
+  }
+}
+.finish__button {
+  position: absolute;
+  top:50%;
+  transform: translateY(-50%);
+  right:5vw;
+  padding: 1vw 3vw;
+  border-radius: 2vw;
+  color: #000;
+  font-weight: 600;
+  text-decoration: none;
+  background: #fff;
+}
+.finish__button:visited {
+  color: #000;
+}
