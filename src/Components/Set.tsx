@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 import { context } from '../context';
+import '../scss/set.scss';
 
 export default function Set() {
   const {pomodoro, setPomodoro} = useContext(context);
@@ -23,7 +24,7 @@ export default function Set() {
 
   return (
     <>
-    <form>
+    <form className='set-form'>
         <div className="set-block">
           <label htmlFor="timer">Timer</label>
           <input type="text" name="timer" value={pomodoro.timer} onChange={(e)=>handleChangeTimer(e)}/>
