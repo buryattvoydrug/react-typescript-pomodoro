@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import { context } from '../context';
 
 type TimerProps = {
   timer: number,
@@ -18,6 +19,7 @@ type TimerState = {
 }
 
 class Timer extends Component<TimerProps, TimerState> {
+
   constructor(props: TimerProps) {
     super(props);
     this.state = {
@@ -59,6 +61,7 @@ class Timer extends Component<TimerProps, TimerState> {
   }
 
   start = ():void => {
+    console.log(this.context);
     this.setState({interval: setInterval(() => this.renderTimer(), 1)});
   }
 
@@ -86,6 +89,7 @@ class Timer extends Component<TimerProps, TimerState> {
   }
 
   render() {
+    // console.log(this.context);
     return (
       <>
         <div className="timer">{this.state.output}</div>
