@@ -12,6 +12,7 @@ export default function Set() {
       break: pomodoro.break,
     });
     localStorage.setItem('lastPomodoroTimer', String(e.currentTarget.value));
+    localStorage.setItem('lastTimer', String(+e.currentTarget.value * 60));
   }
 
   const handleChangeBreak = (e: React.FormEvent<HTMLInputElement>):void => {
@@ -26,15 +27,21 @@ export default function Set() {
     <>
     <form className='set-form'>
         <div className="set-block">
-          <label htmlFor="timer">Timer</label>
-          <input type="text" name="timer" value={pomodoro.timer} onChange={(e)=>handleChangeTimer(e)}/>
+          <label htmlFor="timer">timer</label>
+          <input type="text" name="timer" value={isNaN(pomodoro.timer) ? 0 : pomodoro.timer} onChange={(e)=>handleChangeTimer(e)}/>
+          <span>:00</span>
         </div>
         <div className="set-block">
-          <label htmlFor="break">Break</label>
-          <input type="text" name="break" value={pomodoro.break} onChange={(e)=>handleChangeBreak(e)}/>
+          <label htmlFor="break">break</label>
+          <input type="text" name="break" value={isNaN(pomodoro.break) ? 0 : pomodoro.break} onChange={(e)=>handleChangeBreak(e)}/>
+          <span>:00</span>
         </div>
       </form>
-      <Link to="/" >К таймеру</Link>
+        <div className="ok__button">
+          <Link to='/'>
+            <img src="/images/ok.png" alt="" />
+          </Link>
+        </div>
     </>
       
   )

@@ -8,11 +8,10 @@ import '../scss/timer.scss'
 
 export default function Timer() {
   const {pomodoro} = useContext(context);
-  console.log(pomodoro);
   return (
     <>
       <PomodoroTimer timer={pomodoro.timer} break={pomodoro.break} />
-      <Link className="set__button" to="/set" >Настройка</Link>
+      
     </>
   );
 }
@@ -21,9 +20,10 @@ class PomodoroTimer extends Component<TimerProps, TimerState> {
   constructor(props: TimerProps) {
     super(props);
     this.state = {
-      timerTime: props.timer * 60 - 1,
-      breakTime: props.break * 60 - 1,
-      currentTimer: +(localStorage.getItem('lastTimer') || props.timer * 60 - 1),
+      isActive: false,
+      timerTime: props.timer * 60,
+      breakTime: props.break * 60,
+      currentTimer: +(localStorage.getItem('lastTimer') || props.timer * 60),
       currentTimerName: localStorage.getItem('lastTimerName') || 'timer',
       output: this.timeToString(+(localStorage.getItem('lastTimer') || props.timer * 60)),
       total: +(localStorage.getItem('totalThisSession') || 0),
@@ -59,13 +59,16 @@ class PomodoroTimer extends Component<TimerProps, TimerState> {
   }
 
   start = ():void => {
-    this.setState({interval: setInterval(() => this.renderTimer(), 1)});
+    this.setState({interval: setInterval(() => this.renderTimer(), 1000)});
+    this.setState({isActive: true});
+
   }
 
   stop = ():void => {
     localStorage.setItem('lastTimer', String(this.state.currentTimer));
     localStorage.setItem('lastTimerName', String(this.state.currentTimerName));
     this.setState({interval: clearInterval(this.state.interval)});
+    this.setState({isActive: false});
   }
 
   private isTimeUp = ():boolean => {
@@ -85,20 +88,34 @@ class PomodoroTimer extends Component<TimerProps, TimerState> {
       this.setState({currentTimer: this.state.timerTime, currentTimerName: 'timer'});
   }
 
+  
+
   render() {
     return (
       <>
         <div className="timer">
           <div className="timer__output">{this.state.output}</div>
         </div>
-        <button className="start__button" onClick={() => this.start()}>
-          <img src="/images/play.png" alt="" />
-        </button>
-        <button className="stop__button" onClick={() => this.stop()}>
-          <img src="/images/pause.png" alt="" />
-        </button>
+        {this.state.isActive? 
+            <button className="start__button shadows" onClick={() => this.stop()}>
+              <img src="/images/pause.png" alt="" />
+            </button>
+        :
+          <>
+            <button className="start__button shadows" onClick={() => this.start()}>
+              <img src="/images/play.png" alt="" />
+            </button>
+          </>
+        }
+        {this.state.total && !this.state.isActive &&
+          <Link className="finish__button shadows" to='/total'>finish <img src="/images/finish.png" alt="" /></Link>
+        }
+        {!this.state.isActive &&
+              <Link className="set__button" to="/set" >
+                <img src="/images/settings.png" alt="" />
+              </Link>
+        }
         {/* <span>Hours: {this.state.totalHours}</span> */}
-        <Link className="finish__button" to='/total'>finish</Link>
       </>
     )
   }

@@ -8,6 +8,7 @@ export type TimerProps = {
 }
 
 export type TimerState = {
+  isActive: boolean,
   timerTime: number,
   breakTime: number,
   currentTimer: number,

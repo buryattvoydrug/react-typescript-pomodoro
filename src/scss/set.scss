@@ -2,5 +2,43 @@
     display: flex;
     .set-block{
         color: #fff;
+        label {
+            font-size: 3vw;
+            font-weight: 100;
+            padding: 0 1vw;
+        }
+        span, input {
+            font-size: 5vw;
+            color:#fff;
+        }
+        input {
+            background: none;
+            border: 1px solid #fff;
+            border-radius: 15px;
+            padding: 1vw 0;
+            width: 10vw;
+            text-align: right;
+            outline:none;
+        }
+    }
+}
+@media screen and (max-width: 768px) {
+    .set-form {
+        flex-direction: column;
+        align-items: flex-end;
+        .set-block{
+            margin-bottom: 2vh;
+            label {
+                font-size: 7vw;
+                padding: 0 3vw;
+            }
+            span, input {
+                font-size: 14vw;
+                color:#fff;
+            }
+            input {
+                width: 25vw;
+            }
+        }
     }
 }

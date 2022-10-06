@@ -26,3 +26,11 @@
     height: 4vw;
   }
 }
+@media screen and (max-width: 768px) {
+  .ok__button {
+    margin-top: 10vw;
+    img {
+      height: 10vw;
+    }
+  }
+}

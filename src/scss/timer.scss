@@ -1,4 +1,8 @@
 .timer {
+  position: absolute;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 35vw;
   height: 35vw;
   border: 10px solid #fff;
@@ -11,12 +15,26 @@
     font-size: 9vw;
   }
 }
-.start__button, .stop__button {
+.start__button {
+  position: absolute;
+  bottom: 5vh;
+  left: 50%;
+  transform: translateX(-50%);
   background: none;
   border:none;
+  cursor: pointer;
   img {
+    transition: all .5s;
     height: 4vw;
   }
+}
+.start__button:hover{
+  img {
+    transform: scale(0.9);
+  }
+}
+.shadows:hover {
+  filter: drop-shadow(1px 1px 10px rgba(255, 255, 255, 0.6));
 }
 .finish__button {
   position: absolute;
@@ -29,7 +47,52 @@
   font-weight: 600;
   text-decoration: none;
   background: #fff;
+  transition: all .5s;
+  margin-right: 1vw;
+  img {
+    height: 0.7em;
+  }
 }
 .finish__button:visited {
   color: #000;
+}
+.set__button {
+  position: absolute;
+  width: 4vw;
+  top:50%;
+  transform: translateY(-50%);
+  right:1vw;
+  img {
+    height: 3vw;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .timer {
+    width: 75vw;
+    height: 75vw;
+    .timer__output{
+      font-size: 18vw;
+    }
+  }
+  .start__button {
+    padding: 20px;
+    img {
+      height: 12vw;
+    }
+  }
+  .finish__button {
+    top:5%;
+    right:5vw;
+    padding: 2vw 4vw;
+    border-radius: 4vw;
+  }
+  .set__button {
+    top:5%;
+    left:5vw;
+    transform: translateY(-50%);
+    img {
+      height: 9vw;
+    }
+  }
 }

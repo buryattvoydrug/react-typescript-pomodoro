@@ -5,6 +5,14 @@
   font-family: 'SF Pro Display';
   font-variant-numeric: tabular-nums;
 }
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
 .container {
   width: 100vw;
   height: 100vh;
