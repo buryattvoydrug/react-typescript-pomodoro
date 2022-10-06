@@ -93,7 +93,7 @@ class PomodoroTimer extends Component<TimerProps, TimerState> {
   render() {
     return (
       <>
-        <div className='total__hours'>{"|".repeat(this.state.totalHours)}</div>
+        <div className='total__hours__timer'>{"|".repeat(this.state.totalHours)}</div>
         <div className={this.state.currentTimerName === 'break' ? "timer break" : "timer"}>
           <div className="timer__output">{this.state.output}</div>
         </div>
