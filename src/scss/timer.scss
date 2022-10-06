@@ -8,10 +8,12 @@
   border: 10px solid #fff;
   border-radius: 1000px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   transition: all 0.5s;
   .timer__output{
+    padding-top: 3vw;
     color: #ffffff;
     font-size: 9vw;
   }
@@ -78,11 +80,16 @@
     height: 3vw;
   }
 }
+.total__hours {
+  color: #fff;
+  font-size: 2vw;
+}
 
 @media screen and (max-width: 768px) {
   .timer {
     width: 75vw;
     height: 75vw;
+    padding-top: 3vw;
     .timer__output{
       font-size: 18vw;
     }
@@ -106,6 +113,9 @@
     img {
       height: 9vw;
     }
+  }
+  .total__hours {
+    font-size: 5vw;
   }
   .break {
     box-shadow: 

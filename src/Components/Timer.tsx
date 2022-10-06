@@ -59,7 +59,7 @@ class PomodoroTimer extends Component<TimerProps, TimerState> {
   }
 
   start = ():void => {
-    this.setState({interval: setInterval(() => this.renderTimer(), 1)});
+    this.setState({interval: setInterval(() => this.renderTimer(), 1000)});
     this.setState({isActive: true});
 
   }
@@ -95,6 +95,7 @@ class PomodoroTimer extends Component<TimerProps, TimerState> {
       <>
         <div className={this.state.currentTimerName === 'break' ? "timer break" : "timer"}>
           <div className="timer__output">{this.state.output}</div>
+          <div className='total__hours'>{"|".repeat(this.state.totalHours)}</div>
         </div>
         {this.state.isActive? 
             <button className="start__button shadows" onClick={() => this.stop()}>
@@ -115,7 +116,6 @@ class PomodoroTimer extends Component<TimerProps, TimerState> {
                 <img src="/images/settings.png" alt="" />
               </Link>
         }
-        {/* <span>Hours: {this.state.totalHours}</span> */}
       </>
     )
   }
