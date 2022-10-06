@@ -10,10 +10,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.5s;
   .timer__output{
     color: #ffffff;
     font-size: 9vw;
   }
+}
+.break {
+  .timer__output{
+  }
+  background: #b827fc;
+  box-shadow: 
+    0 0 10vw 10vw #b827fc,
+    0 0 10vw 15vw #2c90fc,
+    0 0 10vw 20vw #b8fd33,
+    0 0 10vw 25vw #fec837,
+    0 0 10vw 30vw #fd1892;
 }
 .start__button {
   position: absolute;
@@ -94,5 +106,13 @@
     img {
       height: 9vw;
     }
+  }
+  .break {
+    box-shadow: 
+      0 0 20vw 20vw #b827fc,
+      0 0 20vw 30vw #2c90fc,
+      0 0 20vw 40vw #b8fd33,
+      0 0 20vw 50vw #fec837,
+      0 0 20vw 60vw #fd1892;
   }
 }
