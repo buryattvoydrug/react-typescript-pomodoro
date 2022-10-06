@@ -6,7 +6,16 @@ export type TimerProps = {
   timer: number,
   break: number,
 }
-
+export type ProgressBarProps = {
+  size: number,
+  progress: number,
+}
+export type outputProps = {
+  totalHours: number,
+  currentTimerName: string,
+  output: string,
+  progress: number,
+}
 export type TimerState = {
   isActive: boolean,
   timerTime: number,

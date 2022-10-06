@@ -1,18 +1,16 @@
-import React, { Component, useContext } from 'react'
+import React, { Component, useContext, useRef } from 'react'
 import { Link } from 'react-router-dom';
 import { context } from '../context';
 import { TimerProps, TimerState } from '../types';
 import '../scss/timer.scss'
+import TimerOutput from './TimerOutput';
 
 
 
 export default function Timer() {
   const {pomodoro} = useContext(context);
   return (
-    <>
-      <PomodoroTimer timer={pomodoro.timer} break={pomodoro.break} />
-      
-    </>
+    <PomodoroTimer timer={pomodoro.timer} break={pomodoro.break} />
   );
 }
 
@@ -91,12 +89,15 @@ class PomodoroTimer extends Component<TimerProps, TimerState> {
   
 
   render() {
+    console.log(this.state.currentTimer, this.state.timerTime)
+    const currentPropgress = Math.ceil(this.state.currentTimer / this.state.timerTime * 100) !== 100 ? 
+                             100 - Math.ceil(this.state.currentTimer / this.state.timerTime * 100) - 1 : 0;
     return (
       <>
-        <div className='total__hours__timer'>{"|".repeat(this.state.totalHours)}</div>
-        <div className={this.state.currentTimerName === 'break' ? "timer break" : "timer"}>
-          <div className="timer__output">{this.state.output}</div>
-        </div>
+        <TimerOutput totalHours={this.state.totalHours}
+                     currentTimerName={this.state.currentTimerName}
+                     output={this.state.output}
+                     progress={currentPropgress}/>
         {this.state.isActive? 
             <button className="start__button shadows" onClick={() => this.stop()}>
               <img src="/images/pause.png" alt="" />
