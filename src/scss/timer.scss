@@ -13,14 +13,11 @@
   align-items: center;
   transition: all 0.5s;
   .timer__output{
-    padding-top: 3vw;
     color: #ffffff;
     font-size: 9vw;
   }
 }
 .break {
-  .timer__output{
-  }
   background: #b827fc;
   box-shadow: 
     0 0 10vw 10vw #b827fc,
@@ -81,6 +78,12 @@
   }
 }
 .total__hours {
+  position: absolute;
+  top:0;
+  left:50%;
+  transform: translateX(-50%);
+  top:3vh;
+  z-index: 1;
   color: #fff;
   font-size: 2vw;
 }
@@ -89,7 +92,6 @@
   .timer {
     width: 75vw;
     height: 75vw;
-    padding-top: 3vw;
     .timer__output{
       font-size: 18vw;
     }
